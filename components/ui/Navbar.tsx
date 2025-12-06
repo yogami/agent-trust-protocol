@@ -21,10 +21,8 @@ export function Navbar() {
                             <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden md:block">
                                 {user.name}
                             </span>
-                            <Link href="/dashboard">
-                                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Dashboard
-                                </button>
+                            <Link href="/dashboard" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Dashboard
                             </Link>
                             <button onClick={logout} className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                                 Logout

@@ -1,42 +1,84 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { User as SupabaseUser } from '@supabase/supabase-js';
 
+// Define the shape of our user object (simplified)
 interface User {
     id: string;
-    email: string;
+    email?: string;
     name: string;
+    organization?: string;
 }
 
 interface AuthContextType {
     user: User | null;
-    login: () => void;
-    logout: () => void;
+    login: () => Promise<void>;
+    logout: () => Promise<void>;
     isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Mock login function
-    const login = () => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setUser({
-                id: 'user_123',
-                email: 'demo@trustprotocol.ai',
-                name: 'Dr. Jane Doe',
-            });
+    useEffect(() => {
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session?.user) {
+                setUser(mapSupabaseUser(session.user));
+            }
             setIsLoading(false);
-        }, 800);
+        });
+
+        // Listen for changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session?.user) {
+                setUser(mapSupabaseUser(session.user));
+            } else {
+                setUser(null);
+            }
+            setIsLoading(false);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const login = async () => {
+        setIsLoading(true);
+        // Login Demo: Create a random user to allow RLS to work without full email flow
+        const email = `demo-${Math.random().toString(36).slice(2)}@example.com`;
+        const password = 'demo-password-123';
+
+        try {
+            const { error } = await supabase.auth.signUp({
+                email,
+                password,
+            });
+            if (error) {
+                // If signup fails (e.g. rate limit), try sign in with strict creds (fallback)
+                await supabase.auth.signInWithPassword({ email, password });
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const logout = () => {
-        setUser(null);
+    const logout = async () => {
+        await supabase.auth.signOut();
     };
+
+    const mapSupabaseUser = (u: SupabaseUser): User => ({
+        id: u.id,
+        email: u.email,
+        name: u.email?.split('@')[0] || 'Demo User',
+        organization: 'Demo Org'
+    });
 
     return (
         <AuthContext.Provider value={{ user, login, logout, isLoading }}>

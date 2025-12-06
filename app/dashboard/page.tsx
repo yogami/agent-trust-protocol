@@ -77,7 +77,11 @@ export default function DashboardPage() {
                 <section>
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl font-bold">Your Agents</h2>
-                        <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium text-sm">View All</button>
+                        <div className="flex gap-4">
+                            <a href="/admin/agents/new" className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                + Register New Agent
+                            </a>
+                        </div>
                     </div>
 
                     <div className="glass-panel rounded-xl overflow-hidden">

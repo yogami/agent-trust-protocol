@@ -29,16 +29,12 @@ export function Hero() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Link href="/agents">
-                        <Button size="lg" className="w-full sm:w-auto">
-                            Explore Directory
-                        </Button>
-                    </Link>
-                    <Link href="/pricing">
-                        <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                            Get Verified
-                        </Button>
-                    </Link>
+                    <Button href="/agents" size="lg" className="w-full sm:w-auto">
+                        Explore Directory
+                    </Button>
+                    <Button href="/pricing" variant="secondary" size="lg" className="w-full sm:w-auto">
+                        Get Verified
+                    </Button>
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
