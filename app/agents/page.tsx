@@ -1,11 +1,10 @@
 import { AgentService } from '@/lib/agents/agent.service';
-import { MockAgentRepository } from '@/lib/agents/agent.repository.mock';
+import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase';
 import { AgentCard } from '@/components/ui/AgentCard';
 import { Navbar } from '@/components/ui/Navbar';
 
-// Initialize service with mock repo for now
-// In real app, we would determine which repo to use based on env vars
-const agentService = new AgentService(new MockAgentRepository());
+// Initialize service with real Supabase repo
+const agentService = new AgentService(new SupabaseAgentRepository());
 
 export default async function AgentsPage() {
     const agents = await agentService.getAgents();

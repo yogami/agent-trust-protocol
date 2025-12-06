@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { TrustScoreService } from '@/lib/trustscore/trustscore.service';
-import { MockAgentRepository } from '@/lib/agents/agent.repository.mock';
+import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase';
 
 const trustScoreService = new TrustScoreService();
-const agentRepository = new MockAgentRepository();
+const agentRepository = new SupabaseAgentRepository();
 
 export async function GET(
     request: Request,
