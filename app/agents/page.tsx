@@ -1,6 +1,6 @@
 import { AgentService } from '@/lib/agents/agent.service';
 import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase';
-import { AgentCard } from '@/components/ui/AgentCard';
+import { AgentDirectory } from '@/components/ui/AgentDirectory';
 import { Navbar } from '@/components/ui/Navbar';
 
 // Initialize service with real Supabase repo
@@ -47,11 +47,7 @@ export default async function AgentsPage({ searchParams }: AgentsPageProps) {
                     </p>
                 </header>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {agents.map((agent) => (
-                        <AgentCard key={agent.id} agent={agent} />
-                    ))}
-                </div>
+                <AgentDirectory agents={agents} />
             </div>
         </main>
     );

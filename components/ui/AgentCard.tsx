@@ -17,10 +17,22 @@ export function AgentCard({ agent }: AgentCardProps) {
             .catch(err => console.error('Failed to fetch score', err));
     }, [agent.id]);
 
-    const getScoreColor = (score: number) => {
-        if (score >= 80) return 'text-green-600 dark:text-green-400';
-        if (score >= 50) return 'text-yellow-600 dark:text-yellow-400';
-        return 'text-red-600 dark:text-red-400';
+    const getScoreStyle = (score: number) => {
+        if (score >= 80) return {
+            text: 'text-green-600 dark:text-green-400',
+            badge: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800',
+            label: 'Excellent'
+        };
+        if (score >= 60) return {
+            text: 'text-yellow-600 dark:text-yellow-400',
+            badge: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800',
+            label: 'Good'
+        };
+        return {
+            text: 'text-red-600 dark:text-red-400',
+            badge: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 border-red-200 dark:border-red-800',
+            label: 'Needs Review'
+        };
     };
 
     return (
@@ -56,9 +68,18 @@ export function AgentCard({ agent }: AgentCardProps) {
 
                 <div className="pt-4 mt-auto border-t border-gray-100 dark:border-gray-700 flex justify-between items-center text-sm">
                     <span className="text-gray-500 dark:text-gray-400">TrustScore</span>
-                    <span className={`font-bold text-lg ${score !== null ? getScoreColor(score) : 'text-gray-400'}`}>
-                        {score !== null ? score : 'Loading...'}
-                    </span>
+                    {score !== null ? (
+                        <div className="flex items-center gap-2">
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded border ${getScoreStyle(score).badge}`}>
+                                {getScoreStyle(score).label}
+                            </span>
+                            <span className={`font-bold text-lg ${getScoreStyle(score).text}`}>
+                                {score}
+                            </span>
+                        </div>
+                    ) : (
+                        <span className="text-gray-400 animate-pulse">Loading...</span>
+                    )}
                 </div>
             </div>
         </div>

@@ -15,6 +15,8 @@ interface User {
 interface AuthContextType {
     user: User | null;
     login: () => Promise<void>;
+    loginWithEmail: (email: string) => Promise<{ success: boolean; message: string }>;
+    loginWithGoogle: () => Promise<void>;
     logout: () => Promise<void>;
     isLoading: boolean;
 }
@@ -54,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const password = 'demo-password-123';
 
         try {
-            const { data, error } = await supabase.auth.signUp({
+            const { error } = await supabase.auth.signUp({
                 email,
                 password,
             });
@@ -78,6 +80,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
+    const loginWithEmail = async (email: string): Promise<{ success: boolean; message: string }> => {
+        setIsLoading(true);
+        try {
+            const { error } = await supabase.auth.signInWithOtp({
+                email,
+                options: {
+                    emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
+                },
+            });
+            if (error) throw error;
+            return { success: true, message: 'Check your email for a magic link!' };
+        } catch (e) {
+            console.error('Email login error:', e);
+            return { success: false, message: e instanceof Error ? e.message : 'Failed to send magic link' };
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const loginWithGoogle = async (): Promise<void> => {
+        setIsLoading(true);
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
+                },
+            });
+            if (error) throw error;
+        } catch (e) {
+            console.error('Google login error:', e);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const logout = async () => {
         await supabase.auth.signOut();
         setUser(null);
@@ -91,7 +129,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+        <AuthContext.Provider value={{ user, login, loginWithEmail, loginWithGoogle, logout, isLoading }}>
             {children}
         </AuthContext.Provider>
     );

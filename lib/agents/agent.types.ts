@@ -6,6 +6,8 @@ export interface Agent {
     website_url: string | null;
     compliance_tags: string[];
     is_verified: boolean;
+    trust_score?: number;
+    uptime_percent?: number;
     created_at: string;
     updated_at: string;
 }

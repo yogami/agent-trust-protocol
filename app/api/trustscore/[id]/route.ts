@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { TrustScoreService } from '@/lib/trustscore/trustscore.service';
 import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase';
 
+export const dynamic = 'force-dynamic';
+
 const trustScoreService = new TrustScoreService();
 const agentRepository = new SupabaseAgentRepository();
 
@@ -16,14 +18,19 @@ export async function GET(
         return NextResponse.json({ error: 'Agent not found' }, { status: 404 });
     }
 
-    const score = trustScoreService.calculateScore(agent);
+    const breakdown = trustScoreService.calculateBreakdown(agent);
 
     return NextResponse.json({
-        id,
-        score,
+        agent_id: id,
+        agent_name: agent.name,
+        trust_score: breakdown.normalized,
         breakdown: {
-            verified: agent.is_verified,
-            compliance: agent.compliance_tags
-        }
+            verified: { points: breakdown.verified, max: 40, description: 'Verified agent status' },
+            gdpr: { points: breakdown.gdpr, max: 25, description: 'GDPR compliance' },
+            mdr: { points: breakdown.mdr, max: 30, description: 'MDR certification' },
+            uptime: { points: breakdown.uptime, max: 20, description: 'Uptime > 97%' },
+        },
+        raw_score: breakdown.total,
+        max_possible: 115,
     });
 }

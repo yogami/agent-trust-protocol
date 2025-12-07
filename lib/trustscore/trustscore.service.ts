@@ -1,31 +1,51 @@
 import { Agent } from '../agents/agent.types';
 
+export interface TrustScoreBreakdown {
+    verified: number;
+    gdpr: number;
+    mdr: number;
+    uptime: number;
+    total: number;
+    normalized: number;
+}
+
 export class TrustScoreService {
     calculateScore(agent: Agent): number {
-        let score = 0;
+        const breakdown = this.calculateBreakdown(agent);
+        return breakdown.normalized;
+    }
 
-        // Base score
-        // score += 10; 
+    calculateBreakdown(agent: Agent): TrustScoreBreakdown {
+        let verified = 0;
+        let gdpr = 0;
+        let mdr = 0;
+        let uptime = 0;
 
-        // Verified Creator
+        // Verified: +40 points
         if (agent.is_verified) {
-            score += 50;
+            verified = 40;
         }
 
-        // Compliance Tags
-        if (agent.compliance_tags) {
-            agent.compliance_tags.forEach(tag => {
-                if (tag.toUpperCase() === 'GDPR') {
-                    score += 30;
-                } else if (tag.toUpperCase() === 'HIPAA') {
-                    score += 20; // Bonus for HIPAA
-                } else {
-                    score += 10;
-                }
-            });
+        // GDPR compliance: +25 points
+        if (agent.compliance_tags?.some(tag => tag.toUpperCase() === 'GDPR')) {
+            gdpr = 25;
         }
 
-        // Cap at 100
-        return Math.min(score, 100);
+        // MDR compliance: +30 points
+        if (agent.compliance_tags?.some(tag => tag.toUpperCase() === 'MDR')) {
+            mdr = 30;
+        }
+
+        // Uptime > 97%: +20 points
+        const uptimeValue = agent.uptime_percent ?? 0;
+        if (uptimeValue > 97) {
+            uptime = 20;
+        }
+
+        const total = verified + gdpr + mdr + uptime;
+        // Normalize to 100 (max possible is 115)
+        const normalized = Math.min(100, Math.round((total / 115) * 100));
+
+        return { verified, gdpr, mdr, uptime, total, normalized };
     }
 }
