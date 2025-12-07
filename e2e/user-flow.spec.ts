@@ -19,13 +19,20 @@ test('User successfully navigates to agents and creates new agent', async ({ pag
     // Wait for login to complete (network request), increase timeout for external service
     await expect(page.getByText('Logout')).toBeVisible({ timeout: 15000 });
 
+    // CRITICAL: Wait for auth state to fully propagate in React context
+    await page.waitForTimeout(2000);
+
     // 4. Admin Agent Creation (UI Verification)
     // Navigate to dashboard
     await expect(page.locator('a[href="/dashboard"]')).toBeVisible();
     await page.click('a[href="/dashboard"]');
+
+    // Wait for navigation to complete with increased timeout
+    await page.waitForURL('/dashboard', { timeout: 10000 });
     await expect(page).toHaveURL('/dashboard');
 
-    await page.click('text=+ Register New Agent');
+    await page.click('a[href="/admin/agents/new"]');
+    await page.waitForURL('/admin/agents/new', { timeout: 10000 });
     await expect(page).toHaveURL('/admin/agents/new');
 
     await page.fill('input[name="name"]', 'Playwright Test Agent');
