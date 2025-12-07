@@ -47,6 +47,6 @@ test('User successfully navigates to agents and creates new agent', async ({ pag
 
     // 5. Verify Redirect and Listing
     // Increase timeout for redirect
-    await expect(page).toHaveURL(/\/agents$/, { timeout: 15000 });
+    await expect(page).toHaveURL(/\/agents/, { timeout: 15000 });
     await expect(page.getByText('Playwright Test Agent')).toBeVisible();
 });

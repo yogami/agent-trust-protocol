@@ -5,6 +5,7 @@ import { StatsCard } from '@/components/dashboard/StatsCard';
 import { useAuth } from '@/lib/auth/auth.context';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function DashboardPage() {
     const { user, isLoading } = useAuth();
@@ -78,9 +79,9 @@ export default function DashboardPage() {
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl font-bold">Your Agents</h2>
                         <div className="flex gap-4">
-                            <a href="/admin/agents/new" className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            <Link href="/admin/agents/new" className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                 + Register New Agent
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

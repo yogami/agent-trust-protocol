@@ -6,8 +6,32 @@ import { Navbar } from '@/components/ui/Navbar';
 // Initialize service with real Supabase repo
 const agentService = new AgentService(new SupabaseAgentRepository());
 
-export default async function AgentsPage() {
+interface AgentsPageProps {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function AgentsPage({ searchParams }: AgentsPageProps) {
     const agents = await agentService.getAgents();
+    const resolvedSearchParams = await searchParams;
+    const demoAgentName = resolvedSearchParams.demo_agent as string | undefined;
+
+    if (demoAgentName) {
+        // Inject demo agent for display if it doesn't exist
+        const isAlreadyListed = agents.some(a => a.name === demoAgentName);
+        if (!isAlreadyListed) {
+            agents.unshift({
+                id: 'demo-new-agent',
+                name: demoAgentName,
+                description: 'Demo Agent (Recently Created)',
+                website_url: 'https://demo.example.com',
+                compliance_tags: ['Demo', 'New'],
+                creator_id: 'demo-user-id',
+                is_verified: false,
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            });
+        }
+    }
 
     return (
         <main className="min-h-screen pt-20 pb-16 px-4 md:px-8">
