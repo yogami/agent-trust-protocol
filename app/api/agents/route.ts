@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase';
 import { CreateAgentDTO } from '@/lib/agents/agent.types';
 
+export const dynamic = 'force-dynamic';
+
 const agentRepository = new SupabaseAgentRepository();
 
 export async function GET() {
