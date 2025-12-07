@@ -9,6 +9,9 @@
     "lint": "eslint",
     "test": "vitest"
   },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.2",
     "next": "16.0.7",
