@@ -23,13 +23,14 @@ export async function POST(request: Request) {
             description: body.description,
             website_url: body.website_url,
             compliance_tags: body.compliance_tags || [],
-            creator_id: null // Mock auth for now
+            creator_id: undefined // Mock auth for now
         };
 
         const newAgent = await agentRepository.createAgent(dto);
         return NextResponse.json(newAgent, { status: 201 });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Failed to create agent:', error);
-        return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        return NextResponse.json({ error: errorMessage || 'Internal Server Error' }, { status: 500 });
     }
 }

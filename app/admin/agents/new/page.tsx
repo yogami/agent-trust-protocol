@@ -22,7 +22,6 @@ export default function NewAgentPage() {
                     name: formData.get('name'),
                     description: formData.get('description'),
                     website_url: formData.get('website_url'),
-                    // @ts-ignore
                     compliance_tags: (formData.get('compliance_tags') as string).split(',').map(t => t.trim()).filter(Boolean),
                     is_verified: false
                 });
@@ -32,8 +31,9 @@ export default function NewAgentPage() {
             alert('Agent successfully registered!');
             // Force hard navigation to refresh data
             window.location.href = '/agents';
-        } catch (error: any) {
-            alert('Error creating agent: ' + error.message);
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            alert('Error creating agent: ' + message);
             console.error(error);
         } finally {
             setIsLoading(false);

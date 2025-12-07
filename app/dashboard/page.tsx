@@ -31,7 +31,7 @@ export default function DashboardPage() {
                 <Navbar />
                 <div className="text-center mt-20">
                     <h1 className="text-2xl font-bold">Please Login to view Dashboard</h1>
-                    <p className="text-gray-500 mt-2">Use the "Login Demo" button in the navbar.</p>
+                    <p className="text-gray-500 mt-2">Use the &quot;Login Demo&quot; button in the navbar.</p>
                 </div>
             </main>
         );

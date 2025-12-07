@@ -14,11 +14,14 @@ describe('AgentService', () => {
                 description: 'A test agent',
                 compliance_tags: [],
                 is_verified: false,
+                creator_id: null,
+                website_url: null,
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString(),
             } as Agent),
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const service = new AgentService(mockRepo as any);
         const dto: CreateAgentDTO = { name: 'Test Agent', description: 'A test agent' };
 
@@ -35,6 +38,7 @@ describe('AgentService', () => {
                 { id: '1', name: 'Agent 1' }
             ]),
         };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const service = new AgentService(mockRepo as any);
         const agents = await service.getAgents();
         expect(agents).toHaveLength(1);
