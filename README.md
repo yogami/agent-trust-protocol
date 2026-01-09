@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🛑 ARCHITECTURAL ANCHOR
+This project is part of the **Berlin AI Automation Studio**. 
+It is governed by the global rules in **[berlin-ai-infra](https://github.com/yogami/berlin-ai-infra)**.
 
-## Getting Started
+**Setup for new laptops:**
+1. Clone this repo.
+2. Run `./bootstrap-infra.sh` to link to the global Master Brain.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Agent Trust Protocol
+
+> Decentralized reputation and compliance protocol for autonomous AI agents.
+
+## 🎯 What This Does
+
+The Agent Trust Protocol tracks and verifies AI agent behavior across the Berlin AI ecosystem. It provides:
+- **Reputation Scoring**: Quantified trust metrics based on historical compliance and uptime
+- **Identity Verification**: DID-based agent identity for cross-service authentication
+- **Regulatory Alignment**: EU AI Act compliance tracking for insurers and auditors
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| GET | `/api/health` | Health check |
+| GET | `/api/openapi.json` | OpenAPI 3.0 specification |
+| GET | `/api/docs` | Swagger UI documentation |
+| GET | `/api/agents` | List all registered agents with scores |
+| GET | `/api/agents/:id` | Get agent reputation details |
+| POST | `/api/agents/:id/report` | Submit compliance report |
+| GET | `/api/dashboard` | Trust score dashboard data |
+
+## 🏗️ Architecture
+
+```
+src/
+├── domain/           # Agent entity, TrustScore value object
+├── application/      # CalculateTrustScore, ReportCompliance use cases
+├── infrastructure/   # Supabase adapter, external API clients
+├── lib/
+│   └── trust-protocol/  # Extracted microservice (reusable)
+└── app/              # Next.js App Router pages and API routes
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Install dependencies
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Generate Prisma client
+npx prisma generate
 
-## Learn More
+# Start development server
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to view the trust dashboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 Testing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Unit tests
+npm run test
 
-## Deploy on Vercel
+# With coverage (target: ≥80%)
+npm run test:coverage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# E2E tests
+npm run test:e2e
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔗 Dependencies
+
+| Service | Purpose | Production URL |
+| :--- | :--- | :--- |
+| Agent Trust Verifier | DID resolution & credential verification | `https://agent-trust-verifier-production.up.railway.app` |
+| Supabase | PostgreSQL database | Shared instance (table prefix: `atp_`) |
+
+## 📊 Status
+
+- **Deployment**: Railway
+- **Production URL**: `https://agent-trust-protocol-production.up.railway.app`
+- **Catalog Entry**: [Microservices_Catalog.md](../Microservices_Catalog.md)
+- **OpenAPI**: ✅ Agent-Ready
+
+## ⚙️ Environment Variables
+
+| Variable | Description | Required |
+| :--- | :--- | :--- |
+| `DATABASE_URL` | Supabase connection string | ✅ |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | ✅ |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role key | ✅ |
+
+## 📜 License
+
+MIT
