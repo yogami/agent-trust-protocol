@@ -3,8 +3,14 @@ import { SupabaseAgentRepository } from '@/lib/agents/agent.repository.supabase'
 import { AgentDirectory } from '@/components/ui/AgentDirectory';
 import { Navbar } from '@/components/ui/Navbar';
 
-// Initialize service with real Supabase repo
-const agentService = new AgentService(new SupabaseAgentRepository());
+import { MockAgentRepository } from '@/lib/agents/agent.repository.mock';
+
+// Initialize service with Repo (Mock or Real)
+const agentRepository = process.env.USE_MOCK_REPO === 'true'
+    ? new MockAgentRepository()
+    : new SupabaseAgentRepository();
+
+const agentService = new AgentService(agentRepository);
 
 interface AgentsPageProps {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

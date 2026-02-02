@@ -15,7 +15,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^8.5.3",
     "@supabase/supabase-js": "^2.86.2",
-    "next": "16.0.7",
+    "next": "16.0.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "stripe": "^20.0.0"
