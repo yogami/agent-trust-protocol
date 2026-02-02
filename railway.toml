@@ -2,7 +2,8 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "npm run start"
+# Next.js standalone output creates .next/standalone/server.js
+startCommand = "cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public 2>/dev/null || true && node .next/standalone/server.js"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
