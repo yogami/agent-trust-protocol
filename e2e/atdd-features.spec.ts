@@ -60,7 +60,7 @@ test.describe('Agent Trust Protocol - ATDD Specifications', () => {
     test.describe('FEATURE: Landing Page & Navigation', () => {
         test('GIVEN landing page WHEN loading THEN displays value proposition', async ({ page }) => {
             await page.goto('/');
-            await expect(page.getByText(/TrustScore|Trust|Agent/i)).toBeVisible();
+            await expect(page.getByText(/TrustScore|Trust|Agent/i).first()).toBeVisible();
         });
 
         test('GIVEN landing page WHEN clicking directory link THEN navigates to agents', async ({ page }) => {
