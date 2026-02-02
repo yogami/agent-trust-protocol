@@ -5,6 +5,9 @@ import { Navbar } from '@/components/ui/Navbar';
 
 import { MockAgentRepository } from '@/lib/agents/agent.repository.mock';
 
+// Force dynamic rendering - Supabase isn't available during build
+export const dynamic = 'force-dynamic';
+
 // Initialize service with Repo (Mock or Real)
 const agentRepository = process.env.USE_MOCK_REPO === 'true'
     ? new MockAgentRepository()
