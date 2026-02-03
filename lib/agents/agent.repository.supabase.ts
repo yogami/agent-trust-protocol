@@ -1,15 +1,11 @@
 import { Agent, CreateAgentDTO } from './agent.types';
 import { AgentRepository } from './agent.repository';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseAdmin } from '@/lib/supabase';
 
 export class SupabaseAgentRepository implements AgentRepository {
     async createAgent(data: CreateAgentDTO): Promise<Agent> {
-        // Since we don't have real valid UUIDs for creator_id from mock auth, we will set it to null 
-        // or a specific test UUID if we were fully authenticated. 
-        // For MVP demo, we'll try to insert. If creator_id (foreign key) fails, we might need to handle it.
-        // Assuming database allows nullable creator_id as defined in schema.
-
-        const { data: result, error } = await supabase
+        // Using supabaseAdmin to bypass RLS for registration
+        const { data: result, error } = await supabaseAdmin
             .from('agents')
             .insert({
                 name: data.name,
