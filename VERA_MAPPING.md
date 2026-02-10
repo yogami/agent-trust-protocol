@@ -1,31 +1,31 @@
-# ATF Compliance Mapping: Agent Trust Protocol
+# VERA Compliance Mapping: Agent Trust Protocol
 
-> **Agentic Trust Framework Elements**: 🔐 **Identity** + 👁️ **Behavior** (Cross-Element Reputation Layer)
-> **ATF Spec**: [github.com/massivescale-ai/agentic-trust-framework](https://github.com/massivescale-ai/agentic-trust-framework)
+> **Verifiable Enforcement for Runtime Agents Elements**: 🔐 **Identity** + 👁️ **Behavior** (Cross-Element Reputation Layer)
+> **VERA Spec**: [github.com/massivescale-ai/agentic-trust-framework](https://github.com/massivescale-ai/agentic-trust-framework)
 
-## Role in ATF Architecture
+## Role in VERA Architecture
 
-The Agent Trust Protocol serves as the **cross-element orchestration layer** — aggregating identity verification (Element 1) and behavioral history (Element 2) into quantified reputation scores. It directly supports ATF's maturity model by providing the data foundation for promotion decisions.
+The Agent Trust Protocol serves as the **cross-element orchestration layer** — aggregating identity verification (Element 1) and behavioral history (Element 2) into quantified reputation scores. It directly supports VERA's maturity model by providing the data foundation for promotion decisions.
 
-## ATF Requirements → Implementation
+## VERA Requirements → Implementation
 
-| ATF Concept | Implementation |
+| VERA Concept | Implementation |
 |:---|:---|
 | **Gate 1: Performance** | Trust Score tracks accuracy, uptime, and compliance over time |
 | **Gate 3: Business Value** | Dashboard visualizes quantified agent value metrics |
 | **Gate 4: Incident Record** | Compliance reports create per-agent incident history |
 | **Maturity Assessment** | Trust Score thresholds map to Intern → Principal progression |
 
-## API Endpoints Mapped to ATF
+## API Endpoints Mapped to VERA
 
-| Endpoint | ATF Function |
+| Endpoint | VERA Function |
 |:---|:---|
 | `GET /api/agents` | List all agents with current trust scores (maturity visibility) |
 | `GET /api/agents/:id` | Get agent reputation details (promotion readiness) |
 | `POST /api/agents/:id/report` | Submit compliance report (Gate 4: Incident Record) |
 | `GET /api/dashboard` | Trust score dashboard (Gate 3: Business Value visibility) |
 
-## ATF Promotion Gate Support
+## VERA Promotion Gate Support
 
 | Promotion Gate | Supported | How |
 |:---|:---|:---|
@@ -35,7 +35,7 @@ The Agent Trust Protocol serves as the **cross-element orchestration layer** —
 | Gate 4: Incident Record | ✅ | Per-agent compliance report history |
 | Gate 5: Governance Sign-off | 🟡 | Data layer ready, sign-off workflow TBD |
 
-## Integration with Other ATF Components
+## Integration with Other VERA Components
 
 ```
 agent-trust-verifier (Identity) ──→ Agent Trust Protocol (Reputation) ←── Veracity Core (Behavior)
@@ -47,5 +47,5 @@ agent-trust-verifier (Identity) ──→ Agent Trust Protocol (Reputation) ←�
 
 ---
 
-*Berlin AI Labs — ATF Reference Implementation*
-*[Cloud Security Alliance Agentic Trust Framework](https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents)*
+*Berlin AI Labs — VERA Reference Implementation*
+*[Cloud Security Alliance Verifiable Enforcement for Runtime Agents](https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents)*

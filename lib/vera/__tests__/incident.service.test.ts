@@ -1,8 +1,8 @@
 /**
- * ATF Incident Response Service — Unit Tests
+ * VERA Incident Response Service — Unit Tests
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { IncidentResponseService } from '../incident.service';
+import { IncidentResponseService } from "../incident.service';
 
 describe('IncidentResponseService', () => {
     let service: IncidentResponseService;

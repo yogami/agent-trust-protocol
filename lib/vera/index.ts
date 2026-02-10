@@ -1,6 +1,8 @@
 /**
- * ATF Module Index
- * Exports all Agentic Trust Framework services for the agent-trust-protocol.
+ * VERA Module Index
+ * Exports all Verifiable Enforcement for Runtime Agents (VERA) services.
+ *
+ * @see VERA Paper — Berlin AI Labs (2026)
  */
 
 // Types
@@ -15,4 +17,3 @@ export { MaturityService } from './maturity.service';
 export { SegmentationService } from './segmentation.service';
 export type { AccessRequest, AccessDecision } from './segmentation.service';
 export { IncidentResponseService } from './incident.service';
-

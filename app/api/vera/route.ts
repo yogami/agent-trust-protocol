@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
-import { MaturityService } from '@/lib/atf/maturity.service';
-import { SegmentationService } from '@/lib/atf/segmentation.service';
-import { IncidentResponseService } from '@/lib/atf/incident.service';
-import { AgentMaturity } from '@/lib/atf/maturity.types';
+import { MaturityService } from '@/lib/vera/maturity.service';
+import { SegmentationService } from '@/lib/vera/segmentation.service';
+import { IncidentResponseService } from '@/lib/vera/incident.service';
+import { AgentMaturity } from '@/lib/vera/maturity.types';
 
 /**
- * ATF API — Agent Maturity & Promotion Gates
+ * VERA API — Agent Trust Tier & Promotion Gates
  *
- * POST /api/atf/evaluate — Evaluate agent promotion readiness
- * POST /api/atf/promote  — Execute promotion (via query param ?action=promote)
- * POST /api/atf/access    — Evaluate segmentation access request (via query param ?action=access)
- * POST /api/atf/incident  — Record an incident (via query param ?action=incident)
- * GET  /api/atf            — ATF capability manifest
+ * POST /api/vera/evaluate — Evaluate agent promotion readiness
+ * POST /api/vera/promote  — Execute promotion (via query param ?action=promote)
+ * POST /api/vera/access    — Evaluate segmentation access request (via query param ?action=access)
+ * POST /api/vera/incident  — Record an incident (via query param ?action=incident)
+ * GET  /api/vera            — VERA capability manifest
  */
 
 const maturityService = new MaturityService();
@@ -20,19 +20,19 @@ const incidentService = new IncidentResponseService();
 
 export async function GET() {
     return NextResponse.json({
-        framework: 'Agentic Trust Framework (ATF)',
-        spec: 'https://github.com/massivescale-ai/agentic-trust-framework',
+        framework: 'VERA — Verifiable Enforcement for Runtime Agents',
+        spec: 'https://github.com/berlinailabs/vera-reference-implementation',
         implementedBy: 'Berlin AI Labs — agent-trust-protocol',
-        version: '1.0.0',
-        elements: {
+        version: '2.0.0',
+        pillars: {
             identity: { status: 'implemented', service: 'agent-trust-verifier' },
-            behavior: { status: 'implemented', service: 'veracity-core (PoE-A2A)' },
-            dataGovernance: { status: 'implemented', service: 'convoguard-ai' },
-            segmentation: { status: 'implemented', service: 'agent-trust-protocol/atf' },
-            incidentResponse: { status: 'implemented', service: 'agent-pentest + agent-trust-protocol/atf' },
+            proofOfExecution: { status: 'implemented', service: 'veracity-core (pdp-protocol)' },
+            dataSovereignty: { status: 'implemented', service: 'convoguard-ai' },
+            segmentation: { status: 'implemented', service: 'agent-trust-protocol/vera' },
+            containment: { status: 'implemented', service: 'agent-pentest + agent-trust-protocol/vera' },
         },
-        maturityModel: {
-            levels: ['intern', 'junior', 'senior', 'principal'],
+        trustTiers: {
+            levels: ['T1-intern', 'T2-junior', 'T3-senior', 'T4-principal'],
             promotionGates: ['performance', 'security', 'businessValue', 'incidentRecord', 'governanceSignoff'],
         },
     });

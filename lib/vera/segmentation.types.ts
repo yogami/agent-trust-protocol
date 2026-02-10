@@ -1,6 +1,6 @@
 /**
- * ATF Element 4: Segmentation — "Where can you go?"
- * Implements policy-as-code agent access control per CSA Agentic Trust Framework.
+ * VERA Pillar 3: Data Sovereignty & Segmentation — "Where can you go?"
+ * Implements policy-as-code agent access control per VERA specification.
  *
  * @see https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents
  */

@@ -1,5 +1,5 @@
 /**
- * ATF Incident Response — Circuit Breaker & Kill Switch
+ * VERA Incident Response — Circuit Breaker & Kill Switch
  * Implements Element 5 runtime containment: "What if you go rogue?"
  *
  * This complements agent-pentest (offensive testing) with defensive runtime controls.

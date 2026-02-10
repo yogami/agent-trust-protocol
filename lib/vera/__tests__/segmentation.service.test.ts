@@ -1,9 +1,9 @@
 /**
- * ATF Segmentation Service — Unit Tests
+ * VERA Segmentation Service — Unit Tests
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { SegmentationService } from '../segmentation.service';
-import { SegmentationPolicy } from '../segmentation.types';
+import { SegmentationService } from "../segmentation.service';
+import { SegmentationPolicy } from "../segmentation.types';
 
 describe('SegmentationService', () => {
     let service: SegmentationService;

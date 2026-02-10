@@ -1,7 +1,7 @@
 /**
- * ATF Maturity Model — Agent Autonomy Levels
+ * VERA Trust Tier Model — Agent Autonomy Levels
  * Implements the Intern → Junior → Senior → Principal progression
- * per CSA Agentic Trust Framework.
+ * per VERA specification.
  *
  * @see https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents
  */
@@ -70,7 +70,7 @@ export interface LevelTransition {
     gateResults: PromotionGateResults;
 }
 
-// ─── Promotion Gates (ATF Section 5) ───
+// ─── Promotion Gates (VERA Paper §6) ───
 
 export interface PromotionGateResults {
     gate1_performance: GateResult;

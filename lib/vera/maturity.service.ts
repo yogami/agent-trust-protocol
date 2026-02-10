@@ -1,6 +1,6 @@
 /**
- * ATF Maturity Service — Promotion Logic
- * Evaluates agents against ATF's 5 Promotion Gates and manages level transitions.
+ * VERA Maturity Service — Promotion Logic
+ * Evaluates agents against VERA's 5 Promotion Gates and manages level transitions.
  *
  * @see https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents
  */
@@ -15,7 +15,7 @@ import {
     MATURITY_LEVEL_META,
 } from './maturity.types';
 
-// ─── Gate Thresholds (from ATF Section 5) ───
+// ─── Gate Thresholds (from VERA Paper §6) ───
 
 interface GateThresholds {
     minAccuracy?: number;         // Gate 1

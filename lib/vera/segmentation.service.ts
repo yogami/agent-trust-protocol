@@ -1,5 +1,5 @@
 /**
- * ATF Segmentation Service — Policy Enforcement Engine
+ * VERA Segmentation Service — Policy Enforcement Engine
  * Implements Element 4: "Where can you go?" with policy-as-code evaluation.
  *
  * @see https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents
