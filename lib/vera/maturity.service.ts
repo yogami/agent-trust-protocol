@@ -78,8 +78,8 @@ export class MaturityService {
         if (!nextLevel) {
             return this.allGatesPassed('Already at Principal level');
         }
-
-        const thresholds = PROMOTION_THRESHOLDS[nextLevel];
+        // Type assertion is safe here because getNextLevel never returns 'intern' (which is the lowest level)
+        const thresholds = PROMOTION_THRESHOLDS[nextLevel as Exclude<AgentMaturityLevel, 'intern'>];
         const now = new Date().toISOString();
 
         // Gate 1: Performance
