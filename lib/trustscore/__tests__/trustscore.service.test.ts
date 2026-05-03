@@ -19,7 +19,7 @@ describe('TrustScoreService', () => {
         const agent = {
             is_verified: false,
             compliance_tags: []
-        } as Agent;
+        } as unknown as Agent;
 
         expect(service.calculateScore(agent)).toBe(0);
     });

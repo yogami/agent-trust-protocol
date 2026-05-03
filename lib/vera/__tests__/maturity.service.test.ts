@@ -2,8 +2,8 @@
  * VERA Maturity Service — Unit Tests
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { MaturityService } from "../maturity.service"';
-import { AgentMaturity } from "../maturity.types"';
+import { MaturityService } from "../maturity.service";
+import { AgentMaturity } from "../maturity.types";
 
 describe('MaturityService', () => {
     let service: MaturityService;
