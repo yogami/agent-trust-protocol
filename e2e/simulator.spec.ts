@@ -43,6 +43,10 @@ test.describe('VaultBot Heist Simulator (Day 2 Pivot)', () => {
     console.log(JSON.stringify(responseBody, null, 2));
     console.log("==========================================");
 
+    // Strictly verify the substance of the response: Ensure it's the actual hardware TEE and not a mock
+    expect(responseBody.hardware).toBe('phala-dstack-cvm');
+    expect(responseBody.status).toBe('denied');
+
     // Verify the payload payload matches the malicious scenario
     const postData = JSON.parse(request.postData() || '{}');
     expect(postData.agent.id).toBe('drainbot_9000');
