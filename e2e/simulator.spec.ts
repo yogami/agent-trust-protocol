@@ -34,7 +34,7 @@ test.describe('VaultBot Heist Simulator (Day 2 Pivot)', () => {
     const request = await requestPromise;
     const response = await responsePromise;
     
-    expect(request.url()).toContain('phala.network');
+    expect(request.url()).toContain('/api/enforce');
 
     // Prove it to the user by logging the actual response from the Phala TEE
     const responseBody = await response.json();

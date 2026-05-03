@@ -12,27 +12,26 @@ export function Hero() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                 <span className="inline-block py-1 px-3 rounded-full bg-blue-100/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium mb-8 backdrop-blur-sm">
-                    🚀 Launching the MVP in Berlin
+                    🚀 Live on Solana Colosseum
                 </span>
 
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
-                    TrustScore for <br />
+                    Hardware Firewall for <br />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600 dark:from-blue-400 dark:via-indigo-300 dark:to-violet-400 animate-gradient-x">
-                        Digital Health Agents
+                        Autonomous Agents
                     </span>
                 </h1>
 
                 <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
-                    The first reputation protocol designed for AI in regulated industries.
-                    Verify compliance, track uptime, and build trust with hospitals and insurers.
+                    Runtime protection for agentic wallets. We prevent VaultBot heists and secure autonomous DeFi transactions using the Phala TEE.
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Button href="/agents" size="lg" className="w-full sm:w-auto">
-                        Explore Directory
+                    <Button href="/simulator" size="lg" className="w-full sm:w-auto">
+                        Run Heist Simulator
                     </Button>
-                    <Button href="/pricing" variant="secondary" size="lg" className="w-full sm:w-auto">
-                        Get Verified
+                    <Button href="#" variant="secondary" size="lg" className="w-full sm:w-auto">
+                        View SDK Docs
                     </Button>
                 </div>
 

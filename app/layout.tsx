@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agent Trust Protocol",
-  description: "The TrustScore for Digital Health Agents",
+  title: "Aegis-12 | Hardware Firewall for Agents",
+  description: "Consumer-Facing Firewall for Autonomous Agents powered by the Phala TEE.",
 };
 
 export default function RootLayout({
