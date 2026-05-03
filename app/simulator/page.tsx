@@ -12,8 +12,8 @@ export default function VaultBotSimulator() {
     setLogs(['Intercepting agent intent payload...', 'Routing through Aegis-12 TEE Firewall...', 'Simulating transaction constraints...']);
 
     try {
-      // Hit the live Aegis-12 TEE backend on Phala Network
-      const response = await fetch('https://c27b0861a2bf2891f43f3556d3aa9526d704f7bc-8000.dstack-pha-prod5.phala.network/enforce', {
+      // Hit the proxied Aegis-12 TEE backend on Phala Network (via Next.js rewrite to bypass CORS)
+      const response = await fetch('/api/enforce', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

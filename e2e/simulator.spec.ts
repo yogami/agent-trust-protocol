@@ -13,18 +13,18 @@ test.describe('VaultBot Heist Simulator (Day 2 Pivot)', () => {
 
     // Set up a promise to wait for the specific backend request
     const requestPromise = page.waitForRequest(request => {
-      // It MUST hit this exact Phala Enclave URL, otherwise the test fails
-      const isTargetUrl = request.url() === 'https://c27b0861a2bf2891f43f3556d3aa9526d704f7bc-8000.dstack-pha-prod5.phala.network/enforce';
+      // It routes through the proxy to hit the Phala Enclave
+      const isTargetUrl = request.url().includes('/api/enforce');
       const isPost = request.method() === 'POST';
       return isTargetUrl && isPost;
-    }, { timeout: 10000 });
+    }, { timeout: 15000 });
 
     // Click the execute button
     const executeBtn = page.locator('button', { hasText: 'Execute Transaction' });
     
-    // We will wait for the RESPONSE from the Phala TEE to prove it actually connected and returned
+    // We will wait for the RESPONSE from the proxied Phala TEE to prove it actually connected and returned
     const responsePromise = page.waitForResponse(response => 
-      response.url() === 'https://c27b0861a2bf2891f43f3556d3aa9526d704f7bc-8000.dstack-pha-prod5.phala.network/enforce' && 
+      response.url().includes('/api/enforce') && 
       response.request().method() === 'POST'
     , { timeout: 15000 });
 
